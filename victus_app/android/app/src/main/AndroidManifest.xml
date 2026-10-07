@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
-        android:label="victus_app"
+        android:label="VictusCloud"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
