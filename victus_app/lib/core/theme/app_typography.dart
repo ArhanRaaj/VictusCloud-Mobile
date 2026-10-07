@@ -37,6 +37,16 @@ class AppTypography {
     );
   }
 
+  // Static style aliases used across widgets
+  static TextStyle get h1 => const TextStyle(fontSize: 32, fontWeight: FontWeight.w700, color: AppColors.textPrimary);
+  static TextStyle get h2 => const TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: AppColors.textPrimary);
+  static TextStyle get h3 => const TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: AppColors.textPrimary);
+  static TextStyle get h4 => const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.textPrimary);
+  static TextStyle get body => const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.textPrimary);
+  static TextStyle get body1 => const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.textPrimary);
+  static TextStyle get body2 => const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: AppColors.textSecondary);
+  static TextStyle get caption => const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: AppColors.textSecondary);
+
   // Custom text styles
   static TextStyle consoleMono(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;

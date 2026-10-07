@@ -19,6 +19,11 @@ class AppColors {
   static const Color shimmerBase = Color(0xFF111111);
   static const Color shimmerHighlight = Color(0xFF1A1A1A);
   
+  // Monochrome aliases
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color grey = Color(0xFF8A8A8A);
+  static const Color error = Color(0xFFFFFFFF); // Strict monochrome: pure white for error accents
+  
   // Light theme equivalents
   static const Color lightBackground = Color(0xFFFFFFFF);
   static const Color lightSurface = Color(0xFFF5F5F5);
