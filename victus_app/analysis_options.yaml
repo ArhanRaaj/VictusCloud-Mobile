@@ -1,0 +1,40 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    # Error Rules
+    avoid_print: true
+    avoid_empty_else: true
+    cancel_subscriptions: true
+    close_sinks: true
+    valid_regexps: true
+    
+    # Style Rules
+    prefer_const_constructors: true
+    prefer_const_declarations: true
+    prefer_const_literals_to_create_immutables: true
+    prefer_final_fields: true
+    prefer_final_locals: true
+    always_declare_return_types: true
+    camel_case_types: true
+    file_names: true
+    library_names: true
+    require_trailing_commas: true
+    sort_child_properties_last: true
+    use_key_in_widget_constructors: true
+    
+    # Performance Rules
+    prefer_is_empty: true
+    prefer_is_not_empty: true
+    
+    # Custom specific
+    avoid_returning_null_for_void: true
+    directives_ordering: true
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "lib/generated_plugin_registrant.dart"
+  errors:
+    invalid_annotation_target: ignore

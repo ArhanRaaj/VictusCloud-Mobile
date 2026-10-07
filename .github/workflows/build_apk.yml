@@ -1,0 +1,56 @@
+name: Build VictusCloud Release APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Set up Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Create .env from Repository Secrets or fallback
+        working-directory: victus_app
+        run: |
+          if [ -n "${{ secrets.SUPABASE_URL }}" ]; then
+            echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
+            echo "SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> .env
+            echo "PTERODACTYL_URL=${{ secrets.PTERODACTYL_URL }}" >> .env
+            echo "PAYMENTER_URL=${{ secrets.PAYMENTER_URL }}" >> .env
+          else
+            cp .env.example .env
+          fi
+
+      - name: Install dependencies
+        working-directory: victus_app
+        run: flutter pub get
+
+      - name: Run code generation (build_runner)
+        working-directory: victus_app
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Build Release APK
+        working-directory: victus_app
+        run: flutter build apk --release
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: VictusCloud-Release-APK
+          path: victus_app/build/app/outputs/flutter-apk/app-release.apk
