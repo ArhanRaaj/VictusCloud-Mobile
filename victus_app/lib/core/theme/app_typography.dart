@@ -45,6 +45,8 @@ class AppTypography {
   static TextStyle get body => const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.textPrimary);
   static TextStyle get body1 => const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.textPrimary);
   static TextStyle get body2 => const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: AppColors.textSecondary);
+  static TextStyle get bodyMedium => const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.textPrimary);
+  static TextStyle get bodySmall => const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: AppColors.textSecondary);
   static TextStyle get caption => const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: AppColors.textSecondary);
   static TextStyle get label => const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: AppColors.textSecondary);
   static TextStyle get subtitle => const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.textSecondary);

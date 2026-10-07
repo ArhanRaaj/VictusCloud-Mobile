@@ -7,13 +7,7 @@ import 'package:victus_app/features/server/data/models/schedule_model.dart';
 import 'package:victus_app/features/server/data/models/subuser_model.dart';
 import 'package:victus_app/features/server/data/models/backup_model.dart';
 import 'package:victus_app/features/server/data/models/allocation_model.dart';
-
-class WebsocketAuth {
-  final String token;
-  final String socketUrl;
-
-  WebsocketAuth({required this.token, required this.socketUrl});
-}
+import 'package:victus_app/features/server/data/models/websocket_auth.dart';
 
 class PterodactylClient {
   final Dio apiClient;
@@ -47,7 +41,7 @@ class PterodactylClient {
   Future<WebsocketAuth> getWebsocketCredentials(String serverId) async {
     final response = await apiClient.get('$baseUrl/servers/$serverId/websocket');
     final data = response.data['data'];
-    return WebsocketAuth(token: data['token'], socketUrl: data['socket']);
+    return WebsocketAuth(token: data['token'], socket: data['socket']);
   }
 
   Future<List<FileObject>> listFiles(String serverId, String directory) async {

@@ -33,7 +33,7 @@ enum AuthErrorType {
 class ApiException extends AppException {
   final int statusCode;
 
-  const ApiException(String message, {required this.statusCode, dynamic originalError})
+  const ApiException(String message, {this.statusCode = 500, dynamic originalError})
       : super(message, code: 'API_ERROR_$statusCode', originalError: originalError);
 }
 

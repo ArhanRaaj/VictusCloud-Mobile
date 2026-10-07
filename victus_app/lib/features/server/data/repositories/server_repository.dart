@@ -13,7 +13,7 @@ class ServerRepository {
     try {
       return await _client.getServer(id);
     } catch (e) {
-      throw ApiException(message: 'Failed to load server: $e');
+      throw ApiException('Failed to load server: $e');
     }
   }
 
@@ -21,7 +21,7 @@ class ServerRepository {
     try {
       return await _client.getServerResources(id);
     } catch (e) {
-      throw ApiException(message: 'Failed to load resources: $e');
+      throw ApiException('Failed to load resources: $e');
     }
   }
 
@@ -29,7 +29,7 @@ class ServerRepository {
     try {
       await _client.sendPowerAction(id, action);
     } catch (e) {
-      throw ApiException(message: 'Failed to send power action: $e');
+      throw ApiException('Failed to send power action: $e');
     }
   }
 
@@ -37,16 +37,15 @@ class ServerRepository {
     try {
       await _client.sendCommand(id, command);
     } catch (e) {
-      throw ApiException(message: 'Failed to send command: $e');
+      throw ApiException('Failed to send command: $e');
     }
   }
 
   Future<WebsocketAuth> getWebsocketCredentials(String id) async {
     try {
-      final res = await _client.getWebsocketCredentials(id);
-      return WebsocketAuth(token: res.token, socket: res.socketUrl);
+      return await _client.getWebsocketCredentials(id);
     } catch (e) {
-      throw ApiException(message: 'Failed to get websocket credentials: $e');
+      throw ApiException('Failed to get websocket credentials: $e');
     }
   }
 }

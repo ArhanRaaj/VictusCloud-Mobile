@@ -13,6 +13,7 @@ class AppTextField extends StatefulWidget {
   final bool isPassword;
   final TextEditingController? controller;
   final FocusNode? focusNode;
+  final bool enabled;
   final String? Function(String?)? validator;
   final ValueChanged<String>? onChanged;
 
@@ -25,6 +26,7 @@ class AppTextField extends StatefulWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.isPassword = false,
+    this.enabled = true,
     this.controller,
     this.focusNode,
     this.validator,
@@ -81,6 +83,7 @@ class _AppTextFieldState extends State<AppTextField> {
           child: TextFormField(
             controller: widget.controller,
             focusNode: widget.focusNode ?? _focusNode,
+            enabled: widget.enabled,
             obscureText: _obscureText,
             style: AppTypography.body.copyWith(color: AppColors.white),
             validator: widget.validator,
