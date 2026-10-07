@@ -46,6 +46,12 @@ class AppTypography {
   static TextStyle get body1 => const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.textPrimary);
   static TextStyle get body2 => const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: AppColors.textSecondary);
   static TextStyle get caption => const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: AppColors.textSecondary);
+  static TextStyle get label => const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: AppColors.textSecondary);
+  static TextStyle get subtitle => const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.textSecondary);
+  static TextStyle get subtitle1 => const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.textPrimary);
+  static TextStyle get title => const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.textPrimary);
+  static TextStyle get button => const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary);
+  static TextStyle get monospace => const TextStyle(fontSize: 13, fontFamily: 'monospace', color: AppColors.textPrimary);
 
   // Custom text styles
   static TextStyle consoleMono(BuildContext context) {

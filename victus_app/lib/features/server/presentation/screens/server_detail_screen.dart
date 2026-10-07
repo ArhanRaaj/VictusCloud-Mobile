@@ -61,7 +61,7 @@ class _ServerDetailScreenState extends ConsumerState<ServerDetailScreen> with Si
             serverAsyncValue.when(
               data: (server) => Text(server.name, style: AppTypography.h3),
               loading: () => SkeletonLoader(width: 100, height: 20),
-              error: (_, __) => const Text('Error', style: AppTypography.h3),
+              error: (_, __) => Text('Error', style: AppTypography.h3),
             ),
             const SizedBox(width: 8),
             StatusIndicator(status: status),
