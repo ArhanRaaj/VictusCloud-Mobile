@@ -61,15 +61,9 @@ jobs:
           name: Build-Diagnostics-Log
           path: build_output.log
 
-      - name: Locate and Collect APKs
-        run: |
-          mkdir -p release_apk
-          find . -name "*.apk" -ls
-          find . -name "*.apk" -exec cp {} release_apk/VictusCloud-Release.apk \;
-          ls -la release_apk/
-
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: VictusCloud-Release-APK
-          path: release_apk/VictusCloud-Release.apk
+          path: victus_app/build/app/outputs/flutter-apk/*.apk
+          if-no-files-found: warn
