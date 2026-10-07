@@ -64,11 +64,11 @@ jobs:
       - name: Locate and Collect APKs
         run: |
           mkdir -p release_apk
-          find . -name "*.apk" -type f -exec cp {} release_apk/ \;
+          cp victus_app/build/app/outputs/flutter-apk/app-release.apk release_apk/VictusCloud-Release.apk
           ls -la release_apk/
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: VictusCloud-Release-APK
-          path: release_apk/*.apk
+          path: release_apk/VictusCloud-Release.apk
