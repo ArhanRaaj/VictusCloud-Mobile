@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.victuscloud.victus_app"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 34
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
