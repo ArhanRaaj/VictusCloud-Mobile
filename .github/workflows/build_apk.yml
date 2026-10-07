@@ -36,12 +36,10 @@ jobs:
           FCM_SENDER_ID=${{ secrets.FCM_SENDER_ID || '1234567890' }}
           EOF
 
-      - name: Create Android platform skeleton if needed
+      - name: Configure Android local.properties
         working-directory: victus_app
         run: |
-          if [ ! -d "android" ]; then
-            flutter create . --platforms=android --org=com.victuscloud
-          fi
+          echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
 
       - name: Install dependencies
         working-directory: victus_app
