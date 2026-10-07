@@ -1,5 +1,0 @@
--keep class com.mobilejavalauncher.jni.** { *; }
--keep class com.mobilejavalauncher.game.** { *; }
--keep class com.google.gson.** { *; }
--keepattributes Signature
--keepattributes *Annotation*
