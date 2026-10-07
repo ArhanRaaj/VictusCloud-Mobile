@@ -52,7 +52,9 @@ jobs:
       - name: Build Release APK
         working-directory: victus_app
         run: |
-          flutter build apk --release --no-tree-shake-icons --verbose 2>&1 | tee ../build_output.log
+          mkdir -p ../release_apk
+          flutter build apk --release --no-tree-shake-icons --output=../release_apk --verbose 2>&1 | tee ../build_output.log
+          ls -la ../release_apk/
 
       - name: Upload Build Log
         uses: actions/upload-artifact@v4
@@ -65,5 +67,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: VictusCloud-Release-APK
-          path: victus_app/build/app/outputs/flutter-apk/*.apk
-          if-no-files-found: warn
+          path: release_apk/*.apk
