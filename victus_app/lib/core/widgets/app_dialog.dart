@@ -9,21 +9,24 @@ class AppDialog extends StatelessWidget {
   final String message;
   final String confirmText;
   final String cancelText;
-  final VoidCallback onConfirm;
-  final VoidCallback onCancel;
+  final VoidCallback? onConfirm;
+  final VoidCallback? onCancel;
   final bool isDestructive;
+  final List<Widget>? actions;
 
   const AppDialog({
     super.key,
     required this.title,
     String? message,
     String? content,
-    required this.onConfirm,
-    required this.onCancel,
+    this.onConfirm,
+    this.onCancel,
+    this.actions,
     this.confirmText = 'Confirm',
     this.cancelText = 'Cancel',
     this.isDestructive = false,
-  }) : message = message ?? content ?? '';
+  }) : message = message ?? content ?? '',
+       assert(actions != null || (onConfirm != null && onCancel != null));
 
   @override
   Widget build(BuildContext context) {
@@ -44,26 +47,34 @@ class AppDialog extends StatelessWidget {
               AppSpacing.verticalMedium,
             ],
             Text(title, style: AppTypography.title),
-            AppSpacing.verticalSmall,
-            Text(message, style: AppTypography.body.copyWith(color: AppColors.grey)),
+            if (message.isNotEmpty) ...[
+              AppSpacing.verticalSmall,
+              Text(message, style: AppTypography.body.copyWith(color: AppColors.grey)),
+            ],
             AppSpacing.verticalLarge,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Expanded(
-                  child: VictusSecondaryButton(
-                    text: cancelText,
-                    onPressed: onCancel,
+            if (actions != null)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: actions!,
+              )
+            else
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Expanded(
+                    child: VictusSecondaryButton(
+                      text: cancelText,
+                      onPressed: onCancel ?? () => Navigator.of(context).pop(),
+                    ),
                   ),
-                ),
-                AppSpacing.horizontalMedium,
-                Expanded(
-                  child: isDestructive
-                      ? VictusDangerButton(text: confirmText, onPressed: onConfirm)
-                      : VictusPrimaryButton(text: confirmText, onPressed: onConfirm),
-                ),
-              ],
-            ),
+                  AppSpacing.horizontalMedium,
+                  Expanded(
+                    child: isDestructive
+                      ? VictusDangerButton(text: confirmText, onPressed: onConfirm ?? () {})
+                      : VictusPrimaryButton(text: confirmText, onPressed: onConfirm ?? () {}),
+                  ),
+                ],
+              ),
           ],
         ),
       ),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../providers/auth_provider.dart';
-import '../widgets/auth_form_field.dart';
-import '../widgets/social_auth_button.dart';
-import '../../../core/utils/validators.dart';
-import '../../../core/utils/haptics.dart';
+import 'package:victus_app/features/auth/presentation/providers/auth_provider.dart';
+import 'package:victus_app/features/auth/presentation/widgets/auth_form_field.dart';
+import 'package:victus_app/features/auth/presentation/widgets/social_auth_button.dart';
+import 'package:victus_app/core/utils/validators.dart';
+import 'package:victus_app/core/utils/haptics.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});

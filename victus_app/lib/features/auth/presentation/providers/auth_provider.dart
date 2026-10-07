@@ -2,10 +2,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
-import '../data/repositories/auth_repository.dart';
-import '../domain/entities/auth_state.dart';
-import '../data/models/user_model.dart';
-import '../../../core/errors/error_handler.dart';
+import 'package:victus_app/features/auth/data/repositories/auth_repository.dart';
+import 'package:victus_app/features/auth/domain/entities/auth_state.dart';
+export 'package:victus_app/features/auth/domain/entities/auth_state.dart';
+import 'package:victus_app/features/auth/data/models/user_model.dart';
+import 'package:victus_app/core/errors/error_handler.dart';
 
 final supabaseClientProvider = Provider<SupabaseClient>((ref) => Supabase.instance.client);
 final secureStorageProvider = Provider<FlutterSecureStorage>((ref) => const FlutterSecureStorage());
@@ -48,8 +49,9 @@ class AuthStateNotifier extends StateNotifier<AppAuthState> {
 
   void _initAuthListener() {
     _repository.onAuthStateChange.listen((event) {
-      if (event.session != null && event.user != null) {
-        final userModel = UserModel.fromSupabaseUser(event.user!);
+      final user = event.session?.user;
+      if (user != null) {
+        final userModel = UserModel.fromSupabaseUser(user);
         if (!userModel.panelLinked) {
           state = NeedsPanelLink(userModel);
         } else {

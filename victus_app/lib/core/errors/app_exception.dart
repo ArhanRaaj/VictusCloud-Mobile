@@ -18,7 +18,7 @@ class AuthException extends AppException {
   final AuthErrorType type;
 
   const AuthException(String message, {required this.type, dynamic originalError})
-      : super(message, code: type.name, originalError: originalError);
+      : super(message, originalError: originalError);
 }
 
 enum AuthErrorType {

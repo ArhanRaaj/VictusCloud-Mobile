@@ -1,7 +1,7 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
-import '../../../core/errors/error_handler.dart';
+import 'package:victus_app/core/errors/error_handler.dart';
 
 class AuthRepository {
   final SupabaseClient _supabase;

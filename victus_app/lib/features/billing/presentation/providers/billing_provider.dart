@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../data/repositories/billing_repository.dart';
-import '../data/models/billing_models.dart';
+import 'package:victus_app/features/billing/data/repositories/billing_repository.dart';
+import 'package:victus_app/features/billing/data/models/billing_models.dart';
 
 final servicesProvider = FutureProvider.autoDispose<List<BillingService>>((ref) {
   return ref.read(billingRepositoryProvider).getServices();

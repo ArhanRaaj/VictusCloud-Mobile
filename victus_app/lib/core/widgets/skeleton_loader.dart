@@ -3,6 +3,35 @@ import 'package:shimmer/shimmer.dart';
 import 'package:victus_app/core/theme/app_colors.dart';
 import 'package:victus_app/core/theme/app_spacing.dart';
 
+class SkeletonLoader extends StatelessWidget {
+  final double? width;
+  final double? height;
+  final double borderRadius;
+
+  const SkeletonLoader({
+    super.key,
+    this.width,
+    this.height,
+    this.borderRadius = 8,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: AppColors.surface,
+      highlightColor: AppColors.surfaceVariant,
+      child: Container(
+        width: width ?? double.infinity,
+        height: height ?? 16,
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(borderRadius),
+        ),
+      ),
+    );
+  }
+}
+
 class SkeletonLine extends StatelessWidget {
   final double width;
   final double height;

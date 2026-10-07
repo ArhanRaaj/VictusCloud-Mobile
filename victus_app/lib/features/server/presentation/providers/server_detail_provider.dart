@@ -1,13 +1,17 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:victus_app/features/server/data/repositories/server_repository.dart';
 import 'package:victus_app/features/server/data/services/console_service.dart';
-import 'package:victus_app/data/models/ptero_server.dart';
-import 'package:victus_app/data/models/server_resources.dart';
+import 'package:dio/dio.dart';
+import 'package:victus_app/features/server/data/models/ptero_server.dart';
+import 'package:victus_app/features/server/data/models/server_resources.dart';
 import 'package:victus_app/features/server/data/models/console_message.dart';
 import 'package:victus_app/core/network/pterodactyl_client.dart';
 
 final pterodactylClientProvider = Provider<PterodactylClient>((ref) {
-  return PterodactylClient();
+  return PterodactylClient(
+    apiClient: Dio(),
+    baseUrl: 'https://control.victuscloud.com/api/client',
+  );
 });
 
 final serverRepositoryProvider = Provider<ServerRepository>((ref) {

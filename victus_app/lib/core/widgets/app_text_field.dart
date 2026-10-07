@@ -14,8 +14,10 @@ class AppTextField extends StatefulWidget {
   final TextEditingController? controller;
   final FocusNode? focusNode;
   final bool enabled;
+  final TextStyle? style;
   final String? Function(String?)? validator;
   final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
 
   const AppTextField({
     super.key,
@@ -27,10 +29,12 @@ class AppTextField extends StatefulWidget {
     this.suffixIcon,
     this.isPassword = false,
     this.enabled = true,
+    this.style,
     this.controller,
     this.focusNode,
     this.validator,
     this.onChanged,
+    this.onSubmitted,
   });
 
   @override
@@ -85,9 +89,10 @@ class _AppTextFieldState extends State<AppTextField> {
             focusNode: widget.focusNode ?? _focusNode,
             enabled: widget.enabled,
             obscureText: _obscureText,
-            style: AppTypography.body.copyWith(color: AppColors.white),
+            style: widget.style ?? AppTypography.body.copyWith(color: AppColors.white),
             validator: widget.validator,
             onChanged: widget.onChanged,
+            onFieldSubmitted: widget.onSubmitted,
             decoration: InputDecoration(
               hintText: widget.hint ?? widget.hintText,
               hintStyle: AppTypography.body.copyWith(color: AppColors.grey),

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:victus_app/core/network/pterodactyl_client.dart';
 import 'package:victus_app/core/network/paymenter_client.dart';
@@ -11,11 +12,11 @@ import '../../data/repositories/dashboard_repository.dart';
 import '../../domain/entities/dashboard_state.dart';
 
 final dashboardRepositoryProvider = Provider<DashboardRepository>((ref) {
-  // Assuming these are provided elsewhere in the real app, mocking here for completeness
+  final dio = Dio();
   return DashboardRepository(
-    PterodactylClient(),
-    PaymenterClient(),
-    CacheService(),
+    PterodactylClient(apiClient: dio, baseUrl: 'https://control.victuscloud.com/api/client'),
+    PaymenterClient(apiClient: dio, baseUrl: 'https://billing.victuscloud.com/api/client/v1'),
+    CacheService('dashboard_cache'),
   );
 });
 

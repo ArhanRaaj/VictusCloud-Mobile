@@ -43,7 +43,7 @@ class _StatusIndicatorState extends State<StatusIndicator> with SingleTickerProv
   }
 
   Widget _buildIcon() {
-    switch (widget.status) {
+    switch (_parsedStatus) {
       case ServerStatus.running:
         return FadeTransition(
           opacity: _pulseAnimation,

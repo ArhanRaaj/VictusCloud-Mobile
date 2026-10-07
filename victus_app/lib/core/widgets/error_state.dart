@@ -7,14 +7,14 @@ import 'app_button.dart';
 class ErrorState extends StatelessWidget {
   final String title;
   final String message;
-  final VoidCallback onRetry;
+  final VoidCallback? onRetry;
   final VoidCallback? onReport;
 
   const ErrorState({
     super.key,
     this.title = 'Something went wrong',
     required this.message,
-    required this.onRetry,
+    this.onRetry,
     this.onReport,
   });
 
@@ -37,16 +37,18 @@ class ErrorState extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             AppSpacing.verticalLarge,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                VictusPrimaryButton(text: 'Retry', onPressed: onRetry),
-                if (onReport != null) ...[
-                  AppSpacing.horizontalMedium,
-                  VictusSecondaryButton(text: 'Report', onPressed: onReport),
+            if (onRetry != null || onReport != null)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (onRetry != null)
+                    VictusPrimaryButton(text: 'Retry', onPressed: onRetry),
+                  if (onReport != null) ...[
+                    AppSpacing.horizontalMedium,
+                    VictusSecondaryButton(text: 'Report', onPressed: onReport),
+                  ],
                 ],
-              ],
-            ),
+              ),
           ],
         ),
       ),

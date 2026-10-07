@@ -24,6 +24,10 @@ class ServerResources {
     required this.isSuspended,
   });
 
+  int get memoryLimitBytes => 0;
+  int get diskLimitBytes => 0;
+  double get cpuLimit => 0.0;
+
   factory ServerResources.fromJson(Map<String, dynamic> json) => _$ServerResourcesFromJson(json);
   Map<String, dynamic> toJson() => _$ServerResourcesToJson(this);
 }

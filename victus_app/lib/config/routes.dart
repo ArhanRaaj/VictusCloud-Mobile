@@ -77,7 +77,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/signup',
         pageBuilder: (context, state) => CustomTransitionPage(
           key: state.pageKey,
-          child: const SignUpScreen(),
+          child: const SignupScreen(),
           transitionsBuilder: AppAnimations.fadeSlideTransition,
         ),
       ),

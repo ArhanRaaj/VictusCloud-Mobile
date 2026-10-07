@@ -11,11 +11,14 @@ class EmptyState extends StatelessWidget {
 
   const EmptyState({
     super.key,
-    required this.icon,
-    required this.title,
-    required this.subtitle,
+    IconData? icon,
+    String? title,
+    String? subtitle,
+    String? message,
     this.action,
-  });
+  })  : icon = icon ?? Icons.inbox_outlined,
+        title = title ?? message ?? 'No data',
+        subtitle = subtitle ?? '';
 
   @override
   Widget build(BuildContext context) {

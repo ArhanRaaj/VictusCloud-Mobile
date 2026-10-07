@@ -1,4 +1,4 @@
-import '../data/models/user_model.dart';
+import 'package:victus_app/features/auth/data/models/user_model.dart';
 
 abstract class AppAuthState {
   const AppAuthState();

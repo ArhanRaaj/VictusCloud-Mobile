@@ -4,8 +4,13 @@ import '../../data/models/billing_models.dart';
 import '../providers/billing_provider.dart';
 
 class TicketDetailScreen extends ConsumerStatefulWidget {
-  final SupportTicket ticket;
-  const TicketDetailScreen({Key? key, required this.ticket}) : super(key: key);
+  final SupportTicket? ticket;
+  final String ticketId;
+
+  TicketDetailScreen({Key? key, SupportTicket? ticket, String? ticketId})
+      : ticket = ticket,
+        ticketId = ticketId ?? ticket?.id ?? '',
+        super(key: key);
 
   @override
   ConsumerState<TicketDetailScreen> createState() => _TicketDetailScreenState();
@@ -22,14 +27,14 @@ class _TicketDetailScreenState extends ConsumerState<TicketDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final messagesAsync = ref.watch(ticketMessagesProvider(widget.ticket.id));
+    final messagesAsync = ref.watch(ticketMessagesProvider(widget.ticketId));
 
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0A),
       appBar: AppBar(
         backgroundColor: const Color(0xFF0A0A0A),
         iconTheme: const IconThemeData(color: Colors.white),
-        title: Text(widget.ticket.subject, style: const TextStyle(color: Colors.white, fontSize: 16)),
+        title: Text(widget.ticket?.subject ?? 'Support Ticket', style: const TextStyle(color: Colors.white, fontSize: 16)),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
           child: Container(color: const Color(0xFF262626), height: 1.0),

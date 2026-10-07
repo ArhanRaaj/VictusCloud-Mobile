@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import '../providers/auth_provider.dart';
 import '../widgets/auth_form_field.dart';
 import '../widgets/password_strength_indicator.dart';
-import '../../../core/utils/validators.dart';
-import '../../../core/utils/haptics.dart';
-import '../domain/entities/auth_state.dart';
+import 'package:victus_app/core/utils/validators.dart';
+import 'package:victus_app/core/utils/haptics.dart';
+import 'package:victus_app/features/auth/domain/entities/auth_state.dart';
 
 class SignupScreen extends ConsumerStatefulWidget {
   const SignupScreen({super.key});

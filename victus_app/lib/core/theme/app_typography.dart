@@ -58,7 +58,8 @@ class AppTypography {
   // Custom text styles
   static TextStyle consoleMono(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    return GoogleFonts.jetbrainsMono(
+    return TextStyle(
+      fontFamily: 'monospace',
       fontSize: 13,
       fontWeight: FontWeight.w400,
       color: isDark ? AppColors.textPrimary : AppColors.lightTextPrimary,

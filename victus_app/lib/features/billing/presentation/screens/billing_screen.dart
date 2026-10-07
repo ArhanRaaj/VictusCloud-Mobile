@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/billing_provider.dart';
-import '../data/models/billing_models.dart';
+import 'package:victus_app/features/billing/data/models/billing_models.dart';
 import '../widgets/service_detail_modal.dart';
 import '../widgets/invoice_detail_modal.dart';
 import 'ticket_detail_screen.dart';
