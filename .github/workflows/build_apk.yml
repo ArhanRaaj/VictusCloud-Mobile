@@ -51,18 +51,13 @@ jobs:
 
       - name: Build Release APK
         working-directory: victus_app
-        run: |
-          flutter build apk --release --no-tree-shake-icons --verbose 2>&1 | tee ../build_output.log
-          mkdir -p ../release_apk
-          find build -name "*.apk" -exec cp {} ../release_apk/ \;
-          ls -la ../release_apk/
+        run: flutter build apk --release --no-tree-shake-icons
 
-      - name: Upload Build Log
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: Build-Diagnostics-Log
-          path: build_output.log
+      - name: Collect Release APK
+        run: |
+          mkdir -p release_apk
+          find victus_app/build -name "*.apk" -exec cp {} release_apk/VictusCloud-Release.apk \;
+          ls -la release_apk/
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
