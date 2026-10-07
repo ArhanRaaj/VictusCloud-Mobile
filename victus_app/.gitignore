@@ -53,6 +53,7 @@ key.properties
 # Environment variables
 .env
 .env.*
+!.env.example
 
 # Generated files
 *.g.dart
