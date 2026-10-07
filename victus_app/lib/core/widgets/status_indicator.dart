@@ -6,8 +6,14 @@ import 'package:victus_app/core/theme/app_spacing.dart';
 enum ServerStatus { running, offline, starting, stopping, error, installing, suspended }
 
 class StatusIndicator extends StatefulWidget {
-  final ServerStatus status;
-  const StatusIndicator({super.key, required this.status});
+  final dynamic status;
+  final bool showLabel;
+
+  const StatusIndicator({
+    super.key,
+    required this.status,
+    this.showLabel = true,
+  });
 
   @override
   State<StatusIndicator> createState() => _StatusIndicatorState();
@@ -81,8 +87,20 @@ class _StatusIndicatorState extends State<StatusIndicator> with SingleTickerProv
     }
   }
 
+  ServerStatus get _parsedStatus {
+    if (widget.status is ServerStatus) return widget.status as ServerStatus;
+    final str = widget.status.toString().toLowerCase();
+    if (str.contains('running')) return ServerStatus.running;
+    if (str.contains('starting')) return ServerStatus.starting;
+    if (str.contains('stopping')) return ServerStatus.stopping;
+    if (str.contains('error')) return ServerStatus.error;
+    if (str.contains('install')) return ServerStatus.installing;
+    if (str.contains('suspend')) return ServerStatus.suspended;
+    return ServerStatus.offline;
+  }
+
   String _getStatusText() {
-    switch (widget.status) {
+    switch (_parsedStatus) {
       case ServerStatus.running: return 'Running';
       case ServerStatus.offline: return 'Offline';
       case ServerStatus.starting: return 'Starting';
@@ -95,6 +113,9 @@ class _StatusIndicatorState extends State<StatusIndicator> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
+    if (!widget.showLabel) {
+      return _buildIcon();
+    }
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [

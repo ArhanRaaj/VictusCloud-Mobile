@@ -7,17 +7,19 @@ class StatChip extends StatelessWidget {
   final IconData icon;
   final String label;
   final String value;
+  final VoidCallback? onTap;
 
   const StatChip({
     super.key,
     required this.icon,
     required this.label,
     required this.value,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    Widget chip = Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
         color: AppColors.surfaceVariant,
@@ -35,5 +37,10 @@ class StatChip extends StatelessWidget {
         ],
       ),
     );
+
+    if (onTap != null) {
+      return GestureDetector(onTap: onTap, child: chip);
+    }
+    return chip;
   }
 }

@@ -213,3 +213,44 @@ class VictusIconButton extends StatelessWidget {
     );
   }
 }
+
+class AppButton extends StatelessWidget {
+  final String text;
+  final VoidCallback? onPressed;
+  final bool isLoading;
+  final bool isOutlined;
+  final Widget? icon;
+
+  const AppButton({
+    super.key,
+    required this.text,
+    this.onPressed,
+    this.isLoading = false,
+    this.isOutlined = false,
+    this.icon,
+  });
+
+  const AppButton.outlined({
+    super.key,
+    required this.text,
+    this.onPressed,
+    this.isLoading = false,
+    this.icon,
+  }) : isOutlined = true;
+
+  @override
+  Widget build(BuildContext context) {
+    if (isOutlined) {
+      return VictusSecondaryButton(
+        text: text,
+        onPressed: onPressed,
+        isLoading: isLoading,
+      );
+    }
+    return VictusPrimaryButton(
+      text: text,
+      onPressed: onPressed,
+      isLoading: isLoading,
+    );
+  }
+}

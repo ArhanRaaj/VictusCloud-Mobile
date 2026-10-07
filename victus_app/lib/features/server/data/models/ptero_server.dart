@@ -28,6 +28,8 @@ class PteroServer {
     required this.allocation,
   });
 
+  String get identifier => id;
+
   factory PteroServer.fromJson(Map<String, dynamic> json) => _$PteroServerFromJson(json);
   Map<String, dynamic> toJson() => _$PteroServerToJson(this);
 }

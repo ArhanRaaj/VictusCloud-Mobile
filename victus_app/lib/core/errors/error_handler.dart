@@ -1,4 +1,4 @@
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' as sb;
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'app_exception.dart';
@@ -7,18 +7,8 @@ class ErrorHandler {
   static AppException mapException(dynamic error) {
     if (error is AppException) return error;
 
-    if (error is AuthException) {
-       return error; // supabase auth exception? wait, let's check Supabase types
-    }
-    
-    if (error is AuthException) {
-       // Wait, my AuthException is different from Supabase AuthException.
-    }
-    
-    if (error is AuthException || error is PostgrestException) {
-       if (error is supabase_flutter.AuthException) {
-           return _mapSupabaseAuthException(error);
-       }
+    if (error is sb.AuthException) {
+      return _mapSupabaseAuthException(error);
     }
 
     if (error is DioException) {
@@ -26,45 +16,43 @@ class ErrorHandler {
     }
 
     if (error is PlatformException) {
-      return AppException(error.message ?? 'A platform error occurred', code: error.code, originalError: error);
+      return NetworkException(error.message ?? 'A platform error occurred', originalError: error);
     }
 
-    return AppException(error.toString(), code: 'UNKNOWN_ERROR', originalError: error);
+    return NetworkException(error.toString(), originalError: error);
   }
 
-  static AuthException _mapSupabaseAuthException(dynamic error) {
-      final msg = error.message.toString().toLowerCase();
-      AuthErrorType type = AuthErrorType.unknown;
-      if (msg.contains('invalid login credentials')) {
-        type = AuthErrorType.invalidCredentials;
-      } else if (msg.contains('email not confirmed')) {
-        type = AuthErrorType.emailNotVerified;
-      } else if (msg.contains('already registered')) {
-        type = AuthErrorType.emailInUse;
-      } else if (msg.contains('password should be at least')) {
-        type = AuthErrorType.weakPassword;
-      }
-
-      return AuthException(error.message, type: type, originalError: error);
+  static AuthException _mapSupabaseAuthException(sb.AuthException error) {
+    final message = error.message.toLowerCase();
+    if (message.contains('invalid login credentials') || message.contains('invalid credentials')) {
+      return const AuthException('Invalid email or password.', type: AuthErrorType.invalidCredentials);
+    }
+    if (message.contains('email not confirmed')) {
+      return const AuthException('Email not confirmed. Please check your inbox.', type: AuthErrorType.emailNotVerified);
+    }
+    if (message.contains('user already registered')) {
+      return const AuthException('This email is already registered.', type: AuthErrorType.emailInUse);
+    }
+    if (message.contains('password')) {
+      return const AuthException('Password does not meet security requirements.', type: AuthErrorType.weakPassword);
+    }
+    return AuthException(error.message, type: AuthErrorType.unknown);
   }
 
   static AppException _mapDioException(DioException error) {
-    switch (error.type) {
-      case DioExceptionType.connectionTimeout:
-      case DioExceptionType.sendTimeout:
-      case DioExceptionType.receiveTimeout:
-        return TimeoutException('Connection timed out', originalError: error);
-      case DioExceptionType.badResponse:
-        return ApiException(
-          error.response?.statusMessage ?? 'Bad response',
-          statusCode: error.response?.statusCode ?? 500,
-          originalError: error,
-        );
-      case DioExceptionType.connectionError:
-        return NetworkException('No internet connection', originalError: error);
-      default:
-        return NetworkException('Network error occurred', originalError: error);
+    if (error.type == DioExceptionType.connectionTimeout ||
+        error.type == DioExceptionType.sendTimeout ||
+        error.type == DioExceptionType.receiveTimeout) {
+      return const TimeoutException('Connection timed out. Please try again.');
     }
+    if (error.response != null) {
+      return ApiException(
+        error.response?.data?['errors']?[0]?['detail'] ?? error.message ?? 'Server error',
+        statusCode: error.response?.statusCode ?? 500,
+        originalError: error,
+      );
+    }
+    return NetworkException(error.message ?? 'Network connection failed', originalError: error);
   }
 
   static String getUserMessage(AppException exception) {
@@ -88,8 +76,8 @@ class ErrorHandler {
     } else if (exception is TimeoutException) {
       return 'The request timed out. Please try again.';
     } else if (exception is ApiException) {
-      return 'Server error occurred. Please try again later.';
+      return exception.message;
     }
-    return 'An unexpected error occurred. Please try again.';
+    return exception.message.isNotEmpty ? exception.message : 'An unexpected error occurred. Please try again.';
   }
 }

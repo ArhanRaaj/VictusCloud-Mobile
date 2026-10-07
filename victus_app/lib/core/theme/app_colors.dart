@@ -20,6 +20,7 @@ class AppColors {
   static const Color shimmerHighlight = Color(0xFF1A1A1A);
   
   // Monochrome aliases
+  static const Color black = Color(0xFF000000);
   static const Color white = Color(0xFFFFFFFF);
   static const Color grey = Color(0xFF8A8A8A);
   static const Color error = Color(0xFFFFFFFF); // Strict monochrome: pure white for error accents

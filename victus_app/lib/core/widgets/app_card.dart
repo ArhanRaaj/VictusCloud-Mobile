@@ -11,6 +11,7 @@ class AppCard extends StatefulWidget {
   final String? subtitle;
   final Widget? trailing;
   final Widget? bottomActions;
+  final Widget? child;
   final VoidCallback? onTap;
   final EdgeInsetsGeometry padding;
 
@@ -21,6 +22,7 @@ class AppCard extends StatefulWidget {
     this.subtitle,
     this.trailing,
     this.bottomActions,
+    this.child,
     this.onTap,
     this.padding = AppSpacing.paddingAll,
   });
@@ -80,7 +82,7 @@ class _AppCardState extends State<AppCard> with SingleTickerProviderStateMixin {
         borderRadius: BorderRadius.circular(16),
       ),
       padding: widget.padding,
-      child: Column(
+      child: widget.child ?? Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [

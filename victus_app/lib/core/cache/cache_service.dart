@@ -21,6 +21,8 @@ class CacheService<T> {
     });
   }
 
+  Future<void> set(String key, T value, {Duration? duration}) => put(key, value, duration: duration);
+
   T? get(String key) {
     if (isExpired(key)) {
       remove(key);

@@ -33,4 +33,12 @@ class AppSpacing {
   static const double radiusLg = 16.0;
   static const double radiusXl = 24.0;
   static const double radiusFull = 999.0;
+  // Additional spacing aliases used across widgets
+  static const EdgeInsets paddingAll = EdgeInsets.all(lg);
+  static const SizedBox verticalSmall = SizedBox(height: sm);
+  static const SizedBox verticalMedium = SizedBox(height: md);
+  static const SizedBox verticalLarge = SizedBox(height: xl);
+  static const SizedBox horizontalSmall = SizedBox(width: sm);
+  static const SizedBox horizontalMedium = SizedBox(width: md);
+  static const SizedBox horizontalLarge = SizedBox(width: xl);
 }

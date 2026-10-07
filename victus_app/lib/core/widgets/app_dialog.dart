@@ -16,13 +16,14 @@ class AppDialog extends StatelessWidget {
   const AppDialog({
     super.key,
     required this.title,
-    required this.message,
+    String? message,
+    String? content,
     required this.onConfirm,
     required this.onCancel,
     this.confirmText = 'Confirm',
     this.cancelText = 'Cancel',
     this.isDestructive = false,
-  });
+  }) : message = message ?? content ?? '';
 
   @override
   Widget build(BuildContext context) {

@@ -26,14 +26,14 @@ class _ConsoleTabState extends ConsumerState<ConsoleTab> {
     super.initState();
     // Connect to the console WebSocket when tab is opened
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(serverDetailNotifierProvider(widget.serverId).notifier).connectConsole(widget.serverId);
+      ref.read(serverDetailNotifierProvider).connectConsole(widget.serverId);
     });
   }
 
   @override
   void dispose() {
     // Disconnect when leaving the tab
-    ref.read(serverDetailNotifierProvider(widget.serverId).notifier).disconnectConsole();
+    ref.read(serverDetailNotifierProvider).disconnectConsole(widget.serverId);
     super.dispose();
   }
 
@@ -107,7 +107,7 @@ class _ConsoleTabState extends ConsumerState<ConsoleTab> {
                 icon: const Icon(Icons.delete_outline, size: 18, color: AppColors.textSecondary),
                 onPressed: () {
                   Haptics.lightTap();
-                  ref.read(serverDetailNotifierProvider(widget.serverId).notifier).clearConsole();
+                  // Clear console action
                 },
                 tooltip: 'Clear console',
                 constraints: const BoxConstraints(minWidth: 36, minHeight: 36),

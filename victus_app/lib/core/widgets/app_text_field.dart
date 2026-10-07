@@ -6,11 +6,13 @@ import 'package:victus_app/core/theme/app_animations.dart';
 class AppTextField extends StatefulWidget {
   final String? label;
   final String? hint;
+  final String? hintText;
   final String? errorText;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final bool isPassword;
   final TextEditingController? controller;
+  final FocusNode? focusNode;
   final String? Function(String?)? validator;
   final ValueChanged<String>? onChanged;
 
@@ -18,11 +20,13 @@ class AppTextField extends StatefulWidget {
     super.key,
     this.label,
     this.hint,
+    this.hintText,
     this.errorText,
     this.prefixIcon,
     this.suffixIcon,
     this.isPassword = false,
     this.controller,
+    this.focusNode,
     this.validator,
     this.onChanged,
   });
@@ -76,13 +80,13 @@ class _AppTextFieldState extends State<AppTextField> {
           ),
           child: TextFormField(
             controller: widget.controller,
-            focusNode: _focusNode,
+            focusNode: widget.focusNode ?? _focusNode,
             obscureText: _obscureText,
             style: AppTypography.body.copyWith(color: AppColors.white),
             validator: widget.validator,
             onChanged: widget.onChanged,
             decoration: InputDecoration(
-              hintText: widget.hint,
+              hintText: widget.hint ?? widget.hintText,
               hintStyle: AppTypography.body.copyWith(color: AppColors.grey),
               prefixIcon: widget.prefixIcon,
               suffixIcon: widget.isPassword

@@ -33,6 +33,10 @@ class AppSnackbar {
     );
   }
 
+  static void show(BuildContext context, String message) {
+    showInfo(context, message);
+  }
+
   static void showSuccess(BuildContext context, String message) {
     _show(context, message, Icons.check_circle_outline);
   }

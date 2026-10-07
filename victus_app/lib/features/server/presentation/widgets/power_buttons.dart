@@ -57,13 +57,14 @@ class PowerButtons extends ConsumerWidget {
                 builder: (ctx) => AppDialog(
                   title: 'Kill Server',
                   content: 'Are you sure you want to forcibly stop this server? This may lead to data corruption.',
-                  primaryActionText: 'Kill',
-                  onPrimaryAction: () {
+                  confirmText: 'Kill',
+                  isDestructive: true,
+                  onConfirm: () {
                     ref.read(serverDetailNotifierProvider).sendPowerAction(serverId, 'kill');
                     Navigator.pop(ctx);
                   },
-                  secondaryActionText: 'Cancel',
-                  onSecondaryAction: () => Navigator.pop(ctx),
+                  cancelText: 'Cancel',
+                  onCancel: () => Navigator.pop(ctx),
                 ),
               );
             },
@@ -84,9 +85,7 @@ class PowerButtons extends ConsumerWidget {
     return AppButton.outlined(
       onPressed: enabled ? onPressed : null,
       text: label,
-      icon: icon,
-      borderColor: isDanger ? Colors.red : AppColors.border,
-      textColor: isDanger && enabled ? Colors.red : (enabled ? AppColors.textPrimary : AppColors.textSecondary),
+      icon: Icon(icon, size: 16),
     );
   }
 }
