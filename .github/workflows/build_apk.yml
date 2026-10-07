@@ -53,10 +53,11 @@ jobs:
 
       - name: Build Release APK
         working-directory: victus_app
-        run: flutter build apk --release
+        run: flutter build apk --release --verbose
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: VictusCloud-Release-APK
-          path: victus_app/build/app/outputs/flutter-apk/app-release.apk
+          path: victus_app/build/app/outputs/flutter-apk/*.apk
